@@ -1,0 +1,29 @@
+package hello.core.xml;
+
+import hello.core.member.MemberService;
+import hello.core.member.MemberServiceImpl;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.BeanDefinitionStoreException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
+
+import java.io.FileNotFoundException;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+public class XmlAppContext {
+
+    @Test
+    void xmlAppContext() {
+        ApplicationContext ac = new GenericXmlApplicationContext("appConfig.xml");
+        MemberService memberService = ac.getBean("memberService", MemberService.class);
+        assertThat(memberService).isInstanceOf(MemberService.class);
+
+
+//        assertThrows(BeanDefinitionStoreException.class,
+//                () -> new GenericXmlApplicationContext("appConfig.xml"));
+
+    }
+
+}
